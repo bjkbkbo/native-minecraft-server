@@ -26,12 +26,13 @@ jobs:
       - name: Extract GraalVM Enterprise Edition
         run: |
           tar -zxvf graalvm-ee.tar.gz
+          ls -alSh
 
       # 配置环境变量
       - name: Setup GraalVM Environment
         run: |
-          echo "GRAALVM_HOME=$(pwd)/graalvm-ee-java17-21.3.13" >> $GITHUB_ENV
-          echo "$(pwd)/graalvm-ee-java17-21.3.13/bin" >> $GITHUB_PATH
+          echo "GRAALVM_HOME=$(pwd)/bellsoft-liberica-vm-full-openjdk21-23.1.4" >> $GITHUB_ENV
+          echo "$(pwd)/bellsoft-liberica-vm-full-openjdk21-23.1.4/bin" >> $GITHUB_PATH
           echo "GRAAL_EE_DOWNLOAD_TOKEN=${{ secrets.GRAAL_EE_DOWNLOAD_TOKEN }}" >> $GITHUB_ENV
 
 
