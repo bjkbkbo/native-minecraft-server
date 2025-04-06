@@ -20,7 +20,7 @@ jobs:
       # 下载 GraalVM 企业版
       - name: Download GraalVM Enterprise Edition
         run: |
-          wget --no-check-certificate -O graalvm-ee.tar.gz "https://download.oracle.com/otn/utilities_drivers/oracle-labs/graalvm-ee-java17-linux-amd64-21.3.13.tar.gz?AuthParam=1743957130_1cc390da6df05a8c1d72b002bb35d02a"
+          wget --no-check-certificate -O graalvm-ee.tar.gz "https://download.oracle.com/otn/utilities_drivers/oracle-labs/graalvm-ee-java17-linux-amd64-21.3.13.tar.gz?AuthParam=1743957402_98d9813dead35612e40a1080ba74631c"
 
       # 解压 GraalVM 压缩包
       - name: Extract GraalVM Enterprise Edition
