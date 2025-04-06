@@ -17,10 +17,10 @@ if [[ -z "${GRAALVM_HOME:-}" ]]; then
     exit 1
 fi
 
-#if ! command -v "${NI_EXEC}" &> /dev/null; then
-#    echo "Installing GraalVM Native Image..."
-#    "${GRAALVM_HOME}/bin/gu" install --no-progress native-image
-#fi
+if ! command -v "${NI_EXEC}" &> /dev/null; then
+    echo "Installing GraalVM Native Image..."
+    "${GRAALVM_HOME}/bin/gu" install --no-progress native-image
+fi
 
 if [[ ! -d "${BUILD_DIR}" ]]; then
     mkdir "${BUILD_DIR}"
