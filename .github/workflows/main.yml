@@ -31,8 +31,8 @@ jobs:
       # 配置环境变量
       - name: Setup GraalVM Environment
         run: |
-          echo "GRAALVM_HOME=$(pwd)/bellsoft-liberica-vm-full-openjdk21-23.1.4" >> $GITHUB_ENV
-          echo "$(pwd)/bellsoft-liberica-vm-full-openjdk21-23.1.4/bin" >> $GITHUB_PATH
+          echo "GRAALVM_HOME=$(pwd)/bellsoft-liberica-vm-full-openjdk21-23.1.6" >> $GITHUB_ENV
+          echo "$(pwd)/bellsoft-liberica-vm-full-openjdk21-23.1.6/bin" >> $GITHUB_PATH
           echo "GRAAL_EE_DOWNLOAD_TOKEN=${{ secrets.GRAAL_EE_DOWNLOAD_TOKEN }}" >> $GITHUB_ENV
 
 
