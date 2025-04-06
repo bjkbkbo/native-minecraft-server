@@ -53,7 +53,8 @@ readonly MAIN_CLASS
 
 pushd "${META_INF_PATH}" > /dev/null
 "${NI_EXEC}" --no-fallback \
-  --gc=G1 \
+ --gc=parallel \
+  --static \
   --pgo-instrument \
   -H:ConfigurationFileDirectories="${SCRIPT_DIR}/configuration/" \
   --enable-url-protocols=https \
