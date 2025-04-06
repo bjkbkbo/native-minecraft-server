@@ -61,6 +61,7 @@ pushd "${META_INF_PATH}" > /dev/null
   -H:+AllowVMInspection \
   --initialize-at-build-time=net.minecraft.util.profiling.jfr.event \
   -H:Name="${BINARY_NAME}" \
+  --allow-incomplete-classpath \
   -cp "${CLASSPATH_JOINED//;/:}" \
   "${MAIN_CLASS}"
 
