@@ -54,7 +54,6 @@ readonly MAIN_CLASS
 pushd "${META_INF_PATH}" > /dev/null
 "${NI_EXEC}" --no-fallback \
   -H:ConfigurationFileDirectories="${SCRIPT_DIR}/configuration/" \
-  --static \
   --enable-url-protocols=https \
   --initialize-at-run-time=io.netty,org.apache.logging.log4j \
   -H:+AllowVMInspection \
