@@ -54,14 +54,13 @@ readonly MAIN_CLASS
 pushd "${META_INF_PATH}" > /dev/null
 "${NI_EXEC}" --no-fallback \
  --gc=parallel \
-  --static-nolibc \
+  --static \
   -H:ConfigurationFileDirectories="${SCRIPT_DIR}/configuration/" \
   --enable-url-protocols=https \
   --initialize-at-run-time=io.netty,org.apache.logging.log4j \
   -H:+AllowVMInspection \
   --initialize-at-build-time=net.minecraft.util.profiling.jfr.event \
   -H:Name="${BINARY_NAME}" \
-  --link-at-build-time \
   -cp "${CLASSPATH_JOINED//;/:}" \
   "${MAIN_CLASS}"
 
