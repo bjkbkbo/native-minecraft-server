@@ -47,7 +47,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: minecraft-server
-          path: .
+          path: ./native-minecraft-server
 
       # Extract the tag name if we're running from a tag trigger
       - name: Set tag name from ref
