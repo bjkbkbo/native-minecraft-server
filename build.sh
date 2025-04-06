@@ -53,6 +53,9 @@ readonly MAIN_CLASS
 
 pushd "${META_INF_PATH}" > /dev/null
 "${NI_EXEC}" --no-fallback \
+  --gc=G1 \
+  --pgo \
+  --march=native \
   -H:ConfigurationFileDirectories="${SCRIPT_DIR}/configuration/" \
   --enable-url-protocols=https \
   --initialize-at-run-time=io.netty,org.apache.logging.log4j \
@@ -61,6 +64,7 @@ pushd "${META_INF_PATH}" > /dev/null
   -H:Name="${BINARY_NAME}" \
   -cp "${CLASSPATH_JOINED//;/:}" \
   "${MAIN_CLASS}"
+
 
 mv "${BINARY_NAME}" "${SCRIPT_DIR}/${BINARY_NAME}"
 popd > /dev/null # Exit $META_INF_PATH
