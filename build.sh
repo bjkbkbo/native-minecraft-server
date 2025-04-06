@@ -3,7 +3,7 @@
 set -o errexit
 set -o nounset
 
-SERVER_JAR_DL="https://piston-data.mojang.com/v1/objects/8399e1211e95faa421c1507b322dbeae86d604df/server.jar"
+SERVER_JAR_DL="https://piston-data.mojang.com/v1/objects/15c777e2cfe0556eef19aab534b186c0c6f277e1/server.jar"
 SCRIPT_DIR=$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )
 BUILD_DIR="${SCRIPT_DIR}/build"
 JAR_PATH="${BUILD_DIR}/server.jar"
@@ -66,10 +66,10 @@ mv "${BINARY_NAME}" "${SCRIPT_DIR}/${BINARY_NAME}"
 popd > /dev/null # Exit $META_INF_PATH
 popd > /dev/null # Exit $BUILD_DIR
 
-#if command -v upx &> /dev/null; then
-#    echo "Compressing the native Minecraft server with upx..."
-#    upx "${SCRIPT_DIR}/${BINARY_NAME}"
-#fi
+if command -v upx &> /dev/null; then
+    echo "Compressing the native Minecraft server with upx..."
+    upx "${SCRIPT_DIR}/${BINARY_NAME}"
+fi
 
 echo ""
 echo "Done! The native Minecraft server is located at:"
