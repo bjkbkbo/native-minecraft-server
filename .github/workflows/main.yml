@@ -15,25 +15,25 @@ jobs:
     steps:
       - uses: actions/checkout@v2
         with:
-          fetch-depth: 0  # Fetch all history and tags
+          fetch-depth: 0
 
-      # Create tag with format v-YYYY-MM-DD if not already running on a tag
-      - name: Create tag if not exists
-        if: "!startsWith(github.ref, 'refs/tags/')"
+      # 下载 GraalVM 企业版
+      - name: Download GraalVM Enterprise Edition
         run: |
-          TAG_NAME="v-$(date +'%Y-%m-%d')"
-          echo "Creating tag $TAG_NAME"
-          git config --local user.email "action@github.com"
-          git config --local user.name "GitHub Action"
-          git tag "$TAG_NAME" || echo "Tag already exists, skipping tag creation"
-          git push origin "$TAG_NAME" || echo "Tag already exists remotely, skipping push"
-          echo "TAG_NAME=$TAG_NAME" >> $GITHUB_ENV
+          wget --no-check-certificate -O graalvm-ee.tar.gz "https://download.oracle.com/otn/utilities_drivers/oracle-labs/graalvm-ee-java17-linux-amd64-21.3.13.tar.gz?AuthParam=1743956189_d8087bc1165c49a0c622af5455dbd623"
 
-      - uses: graalvm/setup-graalvm@v1
-        with:
-          java-version: '21'
-          github-token: ${{ secrets.GITHUB_TOKEN }}
+      # 解压 GraalVM 压缩包
+      - name: Extract GraalVM Enterprise Edition
+        run: |
+          tar -zxvf graalvm-ee.tar.gz
 
+      # 配置环境变量
+      - name: Setup GraalVM Environment
+        run: |
+          echo "GRAALVM_HOME=$(pwd)/graalvm-ee-java17-21.3.13" >> $GITHUB_ENV
+          echo "$(pwd)/graalvm-ee-java17-21.3.13/bin" >> $GITHUB_PATH
+
+      # 后续步骤保持不变，例如构建、测试和打包
       - name: Check build.sh
         shell: bash
         run: shellcheck build.sh
