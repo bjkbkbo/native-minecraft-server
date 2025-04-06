@@ -20,7 +20,7 @@ jobs:
       # 下载 GraalVM 企业版
       - name: Download GraalVM Enterprise Edition
         run: |
-          wget --no-check-certificate -O graalvm-ee.tar.gz "http://154.17.237.144:83/graalvm-ee.tar.gz"
+          wget --no-check-certificate -O graalvm-ee.tar.gz "https://download.bell-sw.com/vm/23.1.6/bellsoft-liberica-vm-full-openjdk21.0.6+10-23.1.6+1-linux-amd64.tar.gz"
 
       # 解压 GraalVM 压缩包
       - name: Extract GraalVM Enterprise Edition
