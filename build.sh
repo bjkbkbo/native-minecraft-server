@@ -3,7 +3,7 @@
 set -o errexit
 set -o nounset
 
-SERVER_JAR_DL="https://launcher.mojang.com/v1/objects/c8f83c5655308435b3dcf03c06d9fe8740a77469/server.jar"
+SERVER_JAR_DL="https://piston-data.mojang.com/v1/objects/8399e1211e95faa421c1507b322dbeae86d604df/server.jar"
 SCRIPT_DIR=$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )
 BUILD_DIR="${SCRIPT_DIR}/build"
 JAR_PATH="${BUILD_DIR}/server.jar"
