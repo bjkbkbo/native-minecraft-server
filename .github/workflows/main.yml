@@ -2,6 +2,10 @@ name: Build Native Minecraft Server
 
 on:
   push:
+    branches:
+      - main
+    tags:
+      - 'v-*'
   pull_request:
   workflow_dispatch:
 
@@ -10,19 +14,62 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
+
+      # 如果当前提交还不是 tag，则自动创建格式为 v-{YY-mm-dd} 的 tag
+      - name: Create tag if not exists
+        if: "!startsWith(github.ref, 'refs/tags/')"
+        run: |
+          TAG_NAME="v-$(date +'%y-%m-%d')"
+          echo "Creating tag $TAG_NAME"
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git tag "$TAG_NAME"
+          git push origin "$TAG_NAME"
+
       - uses: graalvm/setup-graalvm@v1
         with:
           java-version: '21'
           github-token: ${{ secrets.GITHUB_TOKEN }}
+
       - name: Check build.sh
         shell: bash
         run: shellcheck build.sh
+
       - name: Build and run native Minecraft server
         shell: bash
         run: |
           ./build.sh
+
       - name: Upload Build Artifact
         uses: actions/upload-artifact@v4
         with:
           name: full-directory
           path: .
+
+      # 以下步骤仅在标签触发时执行（格式必须以 v 开头）
+      - name: Zip artifact for release
+        if: startsWith(github.ref, 'refs/tags/v')
+        run: zip -r full-directory.zip full-directory
+
+      - name: Create Release
+        if: startsWith(github.ref, 'refs/tags/v')
+        id: create_release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: ${{ github.ref }}
+          release_name: Release ${{ github.ref }}
+          draft: false
+          prerelease: false
+
+      - name: Upload Release Asset
+        if: startsWith(github.ref, 'refs/tags/v')
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: full-directory.zip
+          asset_name: full-directory.zip
+          asset_content_type: application/zip
