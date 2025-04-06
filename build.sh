@@ -55,7 +55,6 @@ pushd "${META_INF_PATH}" > /dev/null
 "${NI_EXEC}" --no-fallback \
  --gc=parallel \
   --static \
-  --pgo-instrument \
   -H:ConfigurationFileDirectories="${SCRIPT_DIR}/configuration/" \
   --enable-url-protocols=https \
   --initialize-at-run-time=io.netty,org.apache.logging.log4j \
