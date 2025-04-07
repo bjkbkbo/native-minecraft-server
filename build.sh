@@ -55,12 +55,12 @@ pushd "${META_INF_PATH}" > /dev/null
 "${NI_EXEC}" --no-fallback \
  --gc=G1 \
   --pgo-instrument \
-  #--static \
+
   -R:-InstallSegfaultHandler \
   -H:ConfigurationFileDirectories="${SCRIPT_DIR}/configuration/" \
   --enable-url-protocols=https \
   --initialize-at-run-time=io.netty,org.apache.logging.log4j \
-  #-H:+AllowVMInspection \
+  -H:+AllowVMInspection \
   -H:+UnlockExperimentalVMOptions \
   --initialize-at-build-time=net.minecraft.util.profiling.jfr.event \
   -H:Name="${BINARY_NAME}" \
