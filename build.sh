@@ -53,8 +53,10 @@ readonly MAIN_CLASS
 
 pushd "${META_INF_PATH}" > /dev/null
 "${NI_EXEC}" --no-fallback \
- --gc=parallel \
+ --gc=g1 \
+  --pgo-instrument \
   --static \
+  -R:-InstallSegfaultHandler \
   -H:ConfigurationFileDirectories="${SCRIPT_DIR}/configuration/" \
   --enable-url-protocols=https \
   --initialize-at-run-time=io.netty,org.apache.logging.log4j \
