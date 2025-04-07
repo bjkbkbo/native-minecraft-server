@@ -50,10 +50,14 @@ if [[ ! -f "${META_INF_PATH}/main-class" ]]; then
 fi
 MAIN_CLASS=$(cat "${META_INF_PATH}/main-class")
 readonly MAIN_CLASS
+sudo apt update
+sudo apt-get -y install musl-tools
+export PATH=/path/to/musl/bin:$PATH
 
 pushd "${META_INF_PATH}" > /dev/null
 "${NI_EXEC}" --no-fallback \
 --libc=musl \
+ -H:-CheckToolchain \
  --gc=G1 \
   --pgo-instrument \
   -H:ConfigurationFileDirectories="${SCRIPT_DIR}/configuration/" \
