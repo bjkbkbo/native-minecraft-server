@@ -13,18 +13,25 @@ jobs:
   build:
     runs-on: ubuntu-20.04
     steps:
-      - uses: graalvm/setup-graalvm@v1
+      - uses: actions/checkout@v2
         with:
-          java-version: '21'
-          distribution: 'graalvm'
-          github-token: ${{ secrets.GITHUB_TOKEN }}
-      
-            # 配置环境变量
-            #- name: Setup GraalVM Environment
-            #  run: |
-            #    echo "GRAALVM_HOME=$(pwd)/bellsoft-liberica-vm-full-openjdk21-23.1.6" >> $GITHUB_ENV
-            #    echo "$(pwd)/bellsoft-liberica-vm-full-openjdk21-23.1.6/bin" >> $GITHUB_PATH
-            #    echo "GRAAL_EE_DOWNLOAD_TOKEN=${{ secrets.GRAAL_EE_DOWNLOAD_TOKEN }}" >> $GITHUB_ENV
+          fetch-depth: 0
+
+      # 下载 GraalVM 企业版
+      - name: Download GraalVM Enterprise Edition
+        run: |
+          wget --no-check-certificate -O graalvm-ee.tar.gz "https://download.oracle.com/graalvm/21/latest/graalvm-jdk-21_linux-x64_bin.tar.gz"
+      # 解压 GraalVM 压缩包
+      - name: Extract GraalVM Enterprise Edition
+        run: |
+          tar -zxvf graalvm-ee.tar.gz
+          ls -alSh
+      # 配置环境变量
+      - name: Setup GraalVM Environment
+        run: |
+          echo "GRAALVM_HOME=$(pwd)/graalvm-jdk-21.0.6+8.1" >> $GITHUB_ENV
+          echo "$(pwd)/graalvm-jdk-21.0.6+8.1/bin" >> $GITHUB_PATH
+          echo "GRAAL_EE_DOWNLOAD_TOKEN=${{ secrets.GRAAL_EE_DOWNLOAD_TOKEN }}" >> $GITHUB_ENV
 
 
       # 后续步骤保持不变，例如构建、测试和打包
