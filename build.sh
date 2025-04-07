@@ -19,7 +19,7 @@ fi
 
 if ! command -v "${NI_EXEC}" &> /dev/null; then
     echo "Installing GraalVM Native Image..."
-    #"${GRAALVM_HOME}/bin/gu" install --no-progress native-image
+    "${GRAALVM_HOME}/bin/gu" install --no-progress native-image
 fi
 
 if [[ ! -d "${BUILD_DIR}" ]]; then
