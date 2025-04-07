@@ -53,7 +53,7 @@ readonly MAIN_CLASS
 
 pushd "${META_INF_PATH}" > /dev/null
 "${NI_EXEC}" --no-fallback \
- --gc=g1 \
+ --gc=G1 \
   --pgo-instrument \
   --static \
   -R:-InstallSegfaultHandler \
