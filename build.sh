@@ -52,7 +52,7 @@ MAIN_CLASS=$(cat "${META_INF_PATH}/main-class")
 readonly MAIN_CLASS
 sudo apt update
 sudo apt-get -y install musl-tools
-which musl-gcc
+
 
 export PATH=/usr/local/musl/bin:$PATH
 
