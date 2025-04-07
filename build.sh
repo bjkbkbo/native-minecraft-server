@@ -53,6 +53,7 @@ readonly MAIN_CLASS
 
 pushd "${META_INF_PATH}" > /dev/null
 "${NI_EXEC}" --no-fallback \
+--libc=musl \
  --gc=G1 \
   --pgo-instrument \
   -H:ConfigurationFileDirectories="${SCRIPT_DIR}/configuration/" \
